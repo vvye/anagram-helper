@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 2em;
+    font: 14px/150% sans-serif;
+    color: #333;
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 0.5rem;
+}
+
+fieldset {
+    margin-top: 2em;
+    border: none;
+    border-top: 1px solid #AAA;
+    padding: 1em 0 3em;
+}
+
+legend {
+    margin: 0 1em;
+    padding: 0 1em;
+}
+
+textarea {
+    width: 50em;
+    height: 10em;
+    border: 1px solid #BBB;
+    border-radius: 2px;
+    padding: 0.5em;
+    color: #555;
+}
+
+textarea:focus {
+    border-color: #AAA;
+    -webkit-box-shadow: inset 0 2px 2px #EEE;
+    -moz-box-shadow: inset 0 2px 2px #EEE;
+    box-shadow: inset 0 2px 2px #EEE;
+    color: #333;
+}
+
+textarea.error {
+    border-color: #FAA;
+    -webkit-box-shadow: inset 0 2px 2px #ECC;
+    -moz-box-shadow: inset 0 2px 2px #ECC;
+    box-shadow: inset 0 2px 2px #ECC;
+    background-color: #FEE;
+    color: #833;
+}
+
+textarea.success {
+    border-color: #6B6;
+    -webkit-box-shadow: inset 0 2px 2px #CEC;
+    -moz-box-shadow: inset 0 2px 2px #CEC;
+    box-shadow: inset 0 2px 2px #CEC;
+    background-color: #EFE;
+    color: #383;
+}
+
+button {
+    border: 1px solid #CCC;
+    border-radius: 2px;
+    background-color: #DDD;
+    padding: 0.5em 1em;
+    font: inherit;
+    color: #555;
+    cursor: pointer;
+}
+
+button:hover {
+    border: 1px solid #AAA;
+    color: #333;
+}
+
+#message {
+    margin-top: 2em;
+    border-radius: 2px;
+    background-color: #DEF;
+    padding: 1em;
+    color: #369;
+}
