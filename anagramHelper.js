@@ -1,3 +1,8 @@
+/*
+ I have a hunch this thing would lend itself to being written in Lisp.
+ */
+
+
 function containsChar(string, char) {
     return string.toLowerCase().indexOf(char.toLowerCase()) > -1;
 }
@@ -24,7 +29,7 @@ function showError(msg) {
     $message.html(msg).show();
 }
 
-function clearErrorAndSuccess() {
+function resetState() {
     $anagram.removeClass('error').removeClass('success');
     $message.html('').hide();
 }
@@ -34,13 +39,24 @@ function showSuccess(msg) {
     $message.html(msg).show();
 }
 
-function removeFirstOccurrenceOfChar(string, char) {
-    var lcChar;
-    if (containsCharCaseSensitive(string, lcChar = char.toLowerCase())) {
-        return string.replace(lcChar, '');
-    } else {
-        return string.replace(char.toUpperCase(), '');
+function removeOneChar(string, char) {
+    var lcChar = char.toLowerCase();
+    var ucChar = char.toUpperCase();
+
+    // lowercase character
+    if (char === lcChar) {
+        if (containsCharCaseSensitive(string, char)) {
+            return string.replace(char, '');
+        }
+        return string.replace(ucChar, '');
     }
+
+    // uppercase character
+    if (containsCharCaseSensitive(string, char)) {
+        return string.replace(char, '');
+    }
+    return string.replace(lcChar, '');
+
 
 }
 
@@ -57,10 +73,10 @@ $source.val('');
 $anagram.val('');
 $source.prop('disabled', false);
 $anagram.prop('disabled', true);
-clearErrorAndSuccess();
+resetState();
 
 $toggle.on('click', function () {
-    clearErrorAndSuccess();
+    resetState();
 
     if ($source.prop('disabled')) {
         $source.prop('disabled', false);
@@ -76,14 +92,14 @@ $toggle.on('click', function () {
 
 $source.on('keyup', function () {
 
-    clearErrorAndSuccess();
+    resetState();
     sourceText = $(this).val();
 
 });
 
 $anagram.on('keyup', function () {
 
-    clearErrorAndSuccess();
+    resetState();
 
     $source.val(sourceText);
     var tmpSourceText = sourceText;
@@ -99,14 +115,14 @@ $anagram.on('keyup', function () {
             continue;
         }
         if (!containsChar(sourceText, char)) {
-            showError('You can\'t use ' + char + ' here; it\'s not in the source text.');
+            showError('You can\'t use <strong>' + char + '</strong> here; it\'s not in the source text.');
             return;
         }
         if (!containsChar(tmpSourceText, char)) {
-            showError('You can\'t use ' + char + ' here; there isn\'t enough of it in the source text.');
+            showError('You can\'t use <strong>' + char + '</strong> here; there isn\'t enough of it in the source text.');
             return;
         }
-        tmpSourceText = removeFirstOccurrenceOfChar(tmpSourceText, char);
+        tmpSourceText = removeOneChar(tmpSourceText, char);
         $source.val(tmpSourceText);
     }
 
