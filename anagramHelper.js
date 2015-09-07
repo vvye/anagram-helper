@@ -76,6 +76,7 @@ $anagram.prop('disabled', true);
 resetState();
 
 $toggle.on('click', function () {
+
     resetState();
 
     if ($source.prop('disabled')) {
@@ -88,6 +89,7 @@ $toggle.on('click', function () {
         $anagram.prop('disabled', false);
         $(this).html('Edit source');
     }
+
 });
 
 $source.on('keyup', function () {
@@ -100,6 +102,7 @@ $source.on('keyup', function () {
 $anagram.on('keyup', function () {
 
     resetState();
+    var error = false;
 
     $source.val(sourceText);
     var tmpSourceText = sourceText;
@@ -116,17 +119,19 @@ $anagram.on('keyup', function () {
         }
         if (!containsChar(sourceText, char)) {
             showError('You can\'t use <strong>' + char + '</strong> here; it\'s not in the source text.');
-            return;
+            error = true;
+            continue;
         }
         if (!containsChar(tmpSourceText, char)) {
             showError('You can\'t use <strong>' + char + '</strong> here; there isn\'t enough of it in the source text.');
-            return;
+            error = true;
+            continue;
         }
         tmpSourceText = removeOneChar(tmpSourceText, char);
         $source.val(tmpSourceText);
     }
 
-    if (isEmpty(tmpSourceText)) {
+    if (!error && isEmpty(tmpSourceText)) {
         showSuccess('The text you entered is a valid anagram!')
     }
 
