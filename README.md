@@ -1,5 +1,4 @@
 # Anagram helper
-http://www.eric-kaiser.net/anagramHelper
 
 Are you making anagrams by hand and have a hard time keeping track of the letters you used? This little program is here to help!
 
